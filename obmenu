@@ -19,6 +19,7 @@
 #    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 import obxml, gtk, gtk.glade, gobject, random, time, os, sys
+import signal
 
 class App:
 	def reconfigureOpenbox(self):
@@ -26,7 +27,7 @@ class App:
 		ob = os.popen("which openbox").read().strip()
 		for line in lines:
 			if ob in " ".join(line.split()[10:]):
-				os.kill(int(line.split()[1]), 12)
+				os.kill(int(line.split()[1]), signal.SIGUSR2)
 				break
 	
 	# Recursively creates the treeview model
