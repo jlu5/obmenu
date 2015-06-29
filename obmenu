@@ -490,6 +490,7 @@ class App:
 		self.menu.loadMenu(self.menu_path)
 		
 		# Look for my glade file!
+		localglade = os.path.expanduser("~/.local/share/obmenu/obmenu.glade")
 		if os.path.isfile("obmenu.glade"):
 			# It's here.. looks like a pre-installation execution
 			self.gladefile = "obmenu.glade"
@@ -497,6 +498,8 @@ class App:
 			self.gladefile = "/usr/local/share/obmenu/obmenu.glade"
 		elif os.path.isfile("/usr/share/obmenu/obmenu.glade"):
 			self.gladefile = "/usr/share/obmenu/obmenu.glade"
+		elif os.path.isfile(localglade):
+			self.gladefile = localglade
 		else:
 			print "ERROR: obmenu.glade not found!"
 			print "       check that everything was installed all right"
