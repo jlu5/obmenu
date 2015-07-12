@@ -23,13 +23,10 @@ import signal
 
 class App:
 	def reconfigureOpenbox(self):
-		lines = os.popen("ps aux").read().splitlines()
-		ob = os.popen("which openbox").read().strip()
-		for line in lines:
-			if ob in " ".join(line.split()[10:]):
-				os.kill(int(line.split()[1]), signal.SIGUSR2)
-				break
-	
+		lines = os.popen("pgrep -x openbox").read().splitlines()
+		if lines:
+			os.kill(int(lines[0]), signal.SIGUSR2)
+
 	# Recursively creates the treeview model
 	def createTree(self, padre, menuid):
 		for it in self.menu.getMenu(menuid):
