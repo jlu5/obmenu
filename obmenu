@@ -57,7 +57,8 @@ class App:
 		self.arbol.get_widget("window1").set_title("Obmenu: %s %s" % (self.menu_path, s))
 	
 	# Auxiliary function for model.foreach()
-	def _change_id(self, model, path, it,(old_id, new_id)):
+	def _change_id(self, model, path, it, id_pair):
+		old_id, new_id = id_pair
 		mid = model.get_value(it,5)
 		if mid == old_id:
 			model.set(it, 5, new_id)
